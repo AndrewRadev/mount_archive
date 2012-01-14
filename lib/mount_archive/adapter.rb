@@ -2,17 +2,9 @@ require 'fusefs'
 require 'fileutils'
 
 module MountArchive
-  class FuseAdapter
+  class Adapter
     def initialize(filename)
       @filename = filename
-      @dirname  = @filename + '.d'
-    end
-
-    def mount
-      FuseFS.set_root(self)
-      FileUtils.mkdir_p @dirname
-      FuseFS.mount_under @dirname
-      FuseFS.run
     end
 
     def contents(path)

@@ -1,9 +1,9 @@
 require 'spec_helper'
-require 'mount_archive/fuse_adapter'
+require 'mount_archive/adapter'
 
 module MountArchive
-  describe FuseAdapter do
-    let(:adapter) { MountArchive::FuseAdapter.new('stub') }
+  describe Adapter do
+    let(:adapter) { MountArchive::Adapter.new('stub') }
 
     it "contains a single file named 'hello.txt'" do
       adapter.contents('anything').should eq ['hello.txt']
