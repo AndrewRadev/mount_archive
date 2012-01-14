@@ -1,0 +1,6 @@
+#! /bin/sh
+
+set -e
+
+fusermount -u $1
+rmdir $1

@@ -1,0 +1,15 @@
+#! /usr/bin/env ruby
+
+$: << File.expand_path('../../lib', __FILE__)
+
+require 'mount_archive/fuse'
+
+if ARGV.count < 1
+  puts 'USAGE: mount_archive <archive_name>'
+  exit(1)
+end
+
+filename = ARGV.shift
+
+archive = MountArchive::Fuse.new(filename)
+archive.mount
