@@ -2,7 +2,7 @@
 
 $: << File.expand_path('../../lib', __FILE__)
 
-require 'mount_archive/fuse'
+require 'mount_archive/fuse_adapter'
 
 if ARGV.count < 1
   puts 'USAGE: mount_archive <archive_name>'
@@ -11,5 +11,5 @@ end
 
 filename = ARGV.shift
 
-archive = MountArchive::Fuse.new(filename)
+archive = MountArchive::FuseAdapter.new(filename)
 archive.mount

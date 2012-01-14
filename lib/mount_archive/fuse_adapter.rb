@@ -2,7 +2,7 @@ require 'fusefs'
 require 'fileutils'
 
 module MountArchive
-  class Fuse
+  class FuseAdapter
     def initialize(filename)
       @filename = filename
       @dirname  = @filename + '.d'
