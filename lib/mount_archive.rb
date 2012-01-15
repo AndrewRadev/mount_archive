@@ -1,5 +1,7 @@
 require 'fusefs'
 require 'mount_archive/adapter'
+require 'mount_archive/archive'
+require 'mount_archive/backend/zip'
 
 module MountArchive
   def self.mount(filename)

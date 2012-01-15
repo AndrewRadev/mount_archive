@@ -1,0 +1,8 @@
+#! /usr/bin/env ruby
+
+$: << File.expand_path('../../lib', __FILE__)
+
+require 'mount_archive'
+
+zip = MountArchive::Archive.new('test.zip')
+zip.extract('foo.txt')
