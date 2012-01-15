@@ -10,7 +10,8 @@ module MountArchive
 
       raise "Only zip files supported at this time" if @filename !~ /\.zip$/
 
-      @archive = Archive.new(filename)
+      backend  = Backend::Zip.new(filename)
+      @archive = Archive.new(backend)
     end
 
     def contents(path)

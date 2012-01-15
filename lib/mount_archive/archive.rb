@@ -7,14 +7,14 @@ require 'mount_archive/backend/zip'
 # The Archive class provides an interface to reading and writing an archive's
 # contents.
 #
-# It's initialized with the archive's filename, and based on that, uses one of
-# the available backends to handle primitive operations like listing and
-# extracting files (see the Backend module for details).
+# It's initialized with an instance of one of the available backends, which
+# handles primitive operations like listing and extracting files (see the
+# Backend module for details).
 #
 module MountArchive
   class Archive
-    def initialize(filename)
-      @backend = Backend::Zip.new(filename)
+    def initialize(backend)
+      @backend = backend
     end
 
     def files
