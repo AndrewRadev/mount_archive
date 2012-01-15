@@ -15,6 +15,7 @@ module MountArchive
   class Archive
     def initialize(backend)
       @backend = backend
+      @extracted ||= Set.new
     end
 
     def files
@@ -22,22 +23,25 @@ module MountArchive
     end
 
     def extract(path)
-      @extracted ||= Set.new
       return if @extracted.include? path
 
-      temporary_path = tempdir.join(path)
-      FileUtils.mkdir_p temporary_path.parent if not temporary_path.parent.directory?
+      new_path = create_temp_path(path)
+      in_dir(temp_dir) { @backend.extract(path) }
+      @extracted.add path
 
-      in_dir(tempdir) { @backend.extract(path) }
-      @extracted.add(path)
-
-      temporary_path
+      new_path
     end
 
     private
 
-    def tempdir
-      @tempdir ||= Pathname.new(Dir.mktmpdir)
+    def create_temp_path(path)
+      temp_path = temp_dir.join(path)
+      FileUtils.mkdir_p temp_path.parent if not temp_path.parent.directory?
+      temp_path
+    end
+
+    def temp_dir
+      @temp_dir ||= Pathname.new(Dir.mktmpdir)
     end
 
     def in_dir(dir)
