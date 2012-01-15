@@ -1,3 +1,7 @@
+# The Backend::Zip backend is initialized with a filename, corresponding to a
+# zip archive. It uses the "unzip" command-line utility to inspect the contents
+# of the file.
+#
 module MountArchive
   module Backend
     class Zip
