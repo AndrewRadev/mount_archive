@@ -11,7 +11,7 @@ module MountArchive
     trap 'INT' do
       puts
       puts 'Unmounting...'
-      system "fusermount -u #{dirname}"
+      unmount(dirname)
       exit
     end
 
@@ -19,5 +19,9 @@ module MountArchive
     FileUtils.mkdir_p dirname
     FuseFS.mount_under dirname
     FuseFS.run
+  end
+
+  def self.unmount(dir)
+    system "fusermount -u #{dir} && rmdir #{dir}"
   end
 end
