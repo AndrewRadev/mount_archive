@@ -8,6 +8,13 @@ module MountArchive
     adapter = Adapter.new(filename)
     dirname = filename + '.d'
 
+    trap 'INT' do
+      puts
+      puts 'Unmounting...'
+      system "fusermount -u #{dirname}"
+      exit
+    end
+
     FuseFS.set_root(adapter)
     FileUtils.mkdir_p dirname
     FuseFS.mount_under dirname
