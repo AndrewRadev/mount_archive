@@ -12,7 +12,7 @@ module MountArchive
       end
 
       def extract(path)
-        system("unzip #{@filename} #{path}")
+        system("unzip -qq #{@filename} #{path}")
       end
     end
   end
