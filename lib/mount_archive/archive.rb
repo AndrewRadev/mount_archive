@@ -26,7 +26,7 @@ module MountArchive
       return if @extracted.include? path
 
       new_path = create_temp_path(path)
-      in_dir(temp_dir) { @backend.extract(path) }
+      FileUtils.cd(temp_dir) { @backend.extract(path) }
       @extracted.add path
 
       new_path
@@ -42,13 +42,6 @@ module MountArchive
 
     def temp_dir
       @temp_dir ||= Pathname.new(Dir.mktmpdir)
-    end
-
-    def in_dir(dir)
-      original_dir = FileUtils.getwd
-      FileUtils.cd dir
-      yield
-      FileUtils.cd original_dir
     end
   end
 end
