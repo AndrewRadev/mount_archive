@@ -1,8 +1,10 @@
 require 'pp'
 require 'simplecov'
+require 'pry'
 
 TEST_DIR = File.expand_path(File.dirname(__FILE__) + '/../tmp')
 Dir[File.dirname(__FILE__) + '/support/**/*.rb'].each { |file| require file }
+ENV['PATH'] = "#{File.expand_path(File.dirname(__FILE__) + '/../bin')}:#{ENV['PATH']}"
 
 include Support::ZipArchive
 
