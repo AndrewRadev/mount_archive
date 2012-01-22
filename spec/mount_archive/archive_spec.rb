@@ -8,7 +8,7 @@ module MountArchive
 
     it "knows what the archive's files are" do
       backend.data = { 'one' => 'foo', 'two' => 'bar' }
-      archive.files.should eq %w(one two)
+      archive.files.should =~ %w(one two)
     end
 
     it "can extract a file to a temporary path and return the extracted path" do
