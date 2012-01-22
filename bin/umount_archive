@@ -1,6 +1,17 @@
-#! /bin/sh
+#! /usr/bin/env ruby
 
-set -e
+require 'dante'
+require 'fileutils'
 
-fusermount -u $1
-rmdir $1
+if ARGV.count < 1 or not File.directory? ARGV[0]
+  puts 'USAGE: umount_archive <directory_name>'
+  exit(1)
+end
+
+dir_name     = ARGV.shift
+archive_name = dir_name.chomp('.d')
+
+Dante::Runner.new("mount_archive_#{archive_name}").execute({
+  :kill     => true,
+  :pid_path => "/tmp/mount_archive_#{archive_name}.pid"
+})

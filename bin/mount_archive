@@ -2,6 +2,7 @@
 
 $: << File.expand_path('../../lib', __FILE__)
 
+require 'dante'
 require 'mount_archive'
 
 if ARGV.count < 1
@@ -9,4 +10,11 @@ if ARGV.count < 1
   exit(1)
 end
 
-MountArchive.mount ARGV.shift
+archive_name = ARGV.shift
+
+Dante::Runner.new("mount_archive_#{archive_name}").execute({
+  :daemonize => true,
+  :pid_path  => "/tmp/mount_archive_#{archive_name}.pid"
+}) do
+  MountArchive.mount archive_name
+end

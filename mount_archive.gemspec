@@ -14,6 +14,7 @@ Gem::Specification.new do |s|
   D
 
   s.add_dependency 'fusefs'
+  s.add_dependency 'dante'
 
   s.add_development_dependency 'rspec', '>= 2.0.0'
   s.add_development_dependency 'rake'
