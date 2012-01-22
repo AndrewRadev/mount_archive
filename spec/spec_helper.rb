@@ -7,6 +7,7 @@ Dir[File.dirname(__FILE__) + '/support/**/*.rb'].each { |file| require file }
 ENV['PATH'] = "#{File.expand_path(File.dirname(__FILE__) + '/../bin')}:#{ENV['PATH']}"
 
 include Support::ZipArchive
+include Support::Integration
 
 RSpec.configure do |config|
   config.before do

@@ -7,12 +7,10 @@ describe "Mounting" do
       zip.file 'bar'
     end
 
-    system 'mount_archive test.zip'
-    FileUtils.cd 'test.zip.d' do
+    mount_archive 'test.zip' do
       listing = %x[ ls ]
       listing.should include 'foo.txt'
       listing.should include 'bar'
     end
-    system 'umount_archive test.zip.d'
   end
 end
