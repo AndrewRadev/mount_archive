@@ -2,6 +2,7 @@
 
 $: << File.expand_path('../../lib', __FILE__)
 
+require 'digest/md5'
 require 'dante'
 require 'mount_archive'
 
@@ -12,7 +13,7 @@ end
 
 archive_path = ARGV.shift
 full_path    = File.expand_path(archive_path)
-identifier   = full_path.gsub(/[\/\s]/, '_')
+identifier   = Digest::MD5.hexdigest(full_path)
 
 Dante.run("mount_archive_#{identifier}", {
   :daemonize => true,
