@@ -14,8 +14,8 @@ require 'mount_archive/backend/zip'
 module MountArchive
   class Archive
     def initialize(backend)
-      @backend = backend
-      @extracted ||= Set.new
+      @backend   = backend
+      @extracted = {}
     end
 
     def files
@@ -23,13 +23,11 @@ module MountArchive
     end
 
     def extract(path)
-      return if @extracted.include? path
-
-      new_path = create_temp_path(path)
-      FileUtils.cd(temp_dir) { @backend.extract(path) }
-      @extracted.add path
-
-      new_path
+      @extracted[path] ||= begin
+        new_path = create_temp_path(path)
+        FileUtils.cd(temp_dir) { @backend.extract(path) }
+        new_path
+      end
     end
 
     private
