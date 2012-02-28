@@ -18,6 +18,10 @@ module MountArchive
       def extract(path)
         system("unzip -qq #{@filename} #{path}")
       end
+
+      def update(path)
+        system("zip -qq #{@filename} #{path}")
+      end
     end
   end
 end

@@ -30,6 +30,10 @@ module MountArchive
       end
     end
 
+    def update(path)
+      FileUtils.cd(temp_dir) { @backend.update(path) }
+    end
+
     private
 
     def create_temp_path(path)
